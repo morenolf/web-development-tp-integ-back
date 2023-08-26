@@ -1,7 +1,7 @@
 # Importing the necessary modules and libraries
 from flask import Flask
 from flask_migrate import Migrate
-from routes.blueprint import blueprint
+from routes.routes import blueprint
 
 
 def create_app():
