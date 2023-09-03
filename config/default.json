@@ -1,0 +1,11 @@
+{
+    "server": {
+        "port": 8091,
+        "hostname": "localhost"
+    },
+    "mongoDb": {
+        "url": "mongodb://localhost",
+        "port": 27017,
+        "name": "fullstak-api-db"
+    }
+}
