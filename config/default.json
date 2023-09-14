@@ -4,7 +4,7 @@
         "hostname": "localhost"
     },
     "mongoDb": {
-        "url": "mongodb://localhost",
+        "url": "mongodb://127.0.0.1",
         "port": 27017,
         "name": "fullstak-api-db"
     }

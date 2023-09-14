@@ -1,12 +1,15 @@
 const express = require("express");
-const charactersController = require("../controllers/characters.js");
+const { 
+    CreateCharacters,
+    Characters 
+} = require("../controllers/characters.js");
 
+const { CreateCharacterCheck, UserIdValidator } = require("../controllers/characters_request_validator.js");
 const router = express.Router();
 
-router.route('/')
-.get(charactersController.Characters)
 
-router.route('/')
-.post(charactersController.CreateCharacter)
+router.get('/:userId', UserIdValidator, Characters)
+
+router.get('/', CreateCharacterCheck, CreateCharacters)
 
 module.exports = router;

@@ -1,26 +1,37 @@
-const asyncHandler = require("express-async-handler");
-const charactersRequestValidator = require("../controllers/charactersRequestValidator.js");
 
-const Characters = asyncHandler(async (req, res, next) => {
-    //throw new Error('An error occurred');
+const CharacterModel = require("../models/character.js")
+const CharacterService = require("../services/character_service.js")
+const { validationResult } = require("express-validator");
+const { ValidationError } = require("../models/exceptions.js");
 
+const Characters = async (req, res, next) => {
+    try {
+        let errors = await validationResult(req); 
+        if ( !errors.isEmpty()) {
+            console.log(errors.array());
+            throw new ValidationError('Failed to validate user id');
+        }
+        res.send("ok");
+    } catch (error) {
+        next(error)
+    }
+};
 
-    res.send("ok");
-});
-
-const CreateCharacter = asyncHandler(async (req, res, next) => {
-    let errors = charactersRequestValidator.CreateCharacterCheck(req); 
+const CreateCharacters = async (req, res, next) => {
+    let errors = await validationResult(req); 
     if ( !errors.isEmpty()) {
         console.log(errors.array());
-        throw new ValidationError('An error occurred');
+        next(new ValidationError('Failed to validate character creation'));
     }
 
-    
+    newCharacter = CharacterModel.CharacterFromRequest(req.body)
+
+    CharacterService.CreateCharacter(newCharacter)
 
     res.send("ok");
-});
+};
 
-module.export = {
+module.exports = {
     Characters,
-    CreateCharacter
+    CreateCharacters
 }
