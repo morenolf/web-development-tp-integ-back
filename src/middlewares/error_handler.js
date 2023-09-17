@@ -14,7 +14,11 @@ const ValidateException = function(err) {
     case MaxCharactersError.name:
       err.status = 500
       err.message = "Exceed maximum characters"
-        break;  
+      break;  
+    case CharactersNotFound.name:
+      err.status = 404
+      err.message = "Characters not found"
+      break;        
     default:
       err.status = 500
       err.message = "Failed"

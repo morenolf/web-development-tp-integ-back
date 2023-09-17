@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const CharacterSchema = require("./character_schema.js");
+const CharacterSchema = require("../models/character_schema.js");
+const { RepositoryFailure } = require("../models/exceptions.js");
 
 const CountAll = async function(userId){
     try {
@@ -14,25 +15,25 @@ const CountAll = async function(userId){
 }
 
 const Create = async function(character){
-    newCharacter = schemaFromModel(character);
-    return await CharacterSchema.create(newCharacter);
+    try {
+        return await CharacterSchema.create(character);
+    }catch(err){
+        console.log(err);
+        throw RepositoryFailure("Failed create character")
+    }
 }
 
-const schemaFromModel = function(character){
-    return {            
-        id: mongoose.Types.ObjectId(),
-        userId: character.userId,
-        name: character.name,
-        cloth: {
-            head: character.cloth.head,
-            body: character.cloth.body,
-            legs: character.cloth.legs,
-            feet: character.cloth.feet
-        }
+const GetByUserId = async function(userId){
+    try {
+        return await CharacterSchema.find({userId: userId}).toArray();    
+    }catch(err){
+        console.log(err);
+        throw RepositoryFailure("Failed to retrieve characters by user id")
     }
 }
 
 module.exports = {
     CountAll,
-    Create
+    Create,
+    GetByUserId    
 }

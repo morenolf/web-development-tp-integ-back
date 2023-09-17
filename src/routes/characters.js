@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.get('/:userId', UserIdValidator, Characters)
 
-router.get('/', CreateCharacterCheck, CreateCharacters)
+router.post('/:userId', CreateCharacterCheck, CreateCharacters)
 
 module.exports = router;

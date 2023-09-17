@@ -12,6 +12,13 @@ class ValidationError extends Error {
     }
   }
    
+class CharactersNotFound extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "CharactersNotFound";
+  }
+}
+
 
   class RepositoryFailure extends Error {
     constructor(message) {
@@ -23,6 +30,7 @@ class ValidationError extends Error {
 
   module.exports = { 
     ValidationError,
-    MaxCharactersError,
+    MaxCharactersError,    
+    CharactersNotFound,
     RepositoryFailure
   }
