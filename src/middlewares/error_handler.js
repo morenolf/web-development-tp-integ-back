@@ -1,4 +1,4 @@
-const { ValidationError, MaxCharactersError, RepositoryFailure } = require("../models/exceptions.js");
+const { ValidationError, MaxCharactersError, CharactersNotFound, UserNotAllowed, ClothNotFound, UserNotFound } = require("../models/exceptions.js");
 
 const ErrorHandler = function(err, req, resp, next) {
     ValidateException(err)
@@ -19,6 +19,22 @@ const ValidateException = function(err) {
       err.status = 404
       err.message = "Characters not found"
       break;        
+    case ClothNotFound.name:
+      err.status = 404
+      err.message = "Cloth not found"
+      break;
+    case UserNotAllowed.name:
+      err.status = 401
+      err.message = "Forbbiden"
+      break;
+    case UserNotFound.name:
+      err.status = 404
+      err.message = "User not found"
+      break;
+    case UserNotFound.name:
+      err.status = 405
+      err.message = "Not allowed"
+      break;
     default:
       err.status = 500
       err.message = "Failed"

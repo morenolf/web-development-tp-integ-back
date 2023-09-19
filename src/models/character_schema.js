@@ -3,14 +3,33 @@ const { Schema } = mongoose;
 
 const CharacterSchema = new Schema(
     {
-        id: { type: Schema.Types.ObjectId, require: true },
         userId: { type: String, require: true },
         name: { type: String, require: true },
         cloth: { 
-            head: { type: String, require: true},
-            body: { type: String, require: true},
-            legs: { type: String, require: true},
-            feet: { type: String, require: true}
+            head: { 
+                id: { type: mongoose.Types.ObjectId, require: true },
+                type: { type: String, require: true },
+                name: { type: String, require: true },
+                url: { type: String, require: true }
+            },
+            body: { 
+                id: { type: mongoose.Types.ObjectId, require: true },
+                type: { type: String, require: true },
+                name: { type: String, require: true },
+                url: { type: String, require: true }
+             },
+            legs: { 
+                id: { type: mongoose.Types.ObjectId, require: true },
+                type: { type: String, require: true },
+                name: { type: String, require: true },
+                url: { type: String, require: true }
+             },
+            feet: { 
+                id: { type: mongoose.Types.ObjectId, require: true },
+                type: { type: String, require: true },
+                name: { type: String, require: true },
+                url: { type: String, require: true }
+             }
          }
     },{
         timestamps: true

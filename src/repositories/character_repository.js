@@ -10,7 +10,7 @@ const CountAll = async function(userId){
         })
     }catch(err){
         console.log(err);
-        throw RepositoryFailure("Failed to process character count")
+        throw new RepositoryFailure("Failed to process character count")
     }
 }
 
@@ -25,10 +25,11 @@ const Create = async function(character){
 
 const GetByUserId = async function(userId){
     try {
-        return await CharacterSchema.find({userId: userId}).toArray();    
+        characters = await CharacterSchema.find({userId: userId});  
+        return characters;
     }catch(err){
         console.log(err);
-        throw RepositoryFailure("Failed to retrieve characters by user id")
+        throw new RepositoryFailure("Failed to retrieve characters by user id")
     }
 }
 

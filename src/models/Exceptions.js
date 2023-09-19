@@ -19,18 +19,41 @@ class CharactersNotFound extends Error {
   }
 }
 
-
-  class RepositoryFailure extends Error {
-    constructor(message) {
-      super(message);
-      this.name = "RepositoryFailure";
-    }
+class ClothNotFound extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "CharactersNotFound";
   }
+}
+
+class UserNotAllowed extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "Forbbiden";
+  }
+}
+
+class UserNotFound extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "User not found";
+  }
+}
+
+class RepositoryFailure extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "RepositoryFailure";
+  }
+}
    
 
-  module.exports = { 
-    ValidationError,
-    MaxCharactersError,    
-    CharactersNotFound,
-    RepositoryFailure
-  }
+module.exports = { 
+  ValidationError,
+  MaxCharactersError,    
+  CharactersNotFound,
+  ClothNotFound,
+  UserNotAllowed,
+  UserNotFound,
+  RepositoryFailure
+}
