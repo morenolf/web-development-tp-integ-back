@@ -21,8 +21,7 @@ const Create = async function(character){
 
 const GetByUserId = async function(userId){
     try {
-        characters = await CharacterSchema.find({userId: userId});  
-        return characters;
+        return await CharacterSchema.find({userId: userId});  
     }catch(err){
         console.log(err);
         throw new RepositoryFailure("Failed to retrieve characters by user id")
