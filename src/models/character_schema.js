@@ -7,25 +7,25 @@ const CharacterSchema = new Schema(
         name: { type: String, require: true },
         cloth: { 
             head: { 
-                id: { type: mongoose.Types.ObjectId, require: true },
+                id: { type: Schema.Types.ObjectId, require: true },
                 type: { type: String, require: true },
                 name: { type: String, require: true },
                 url: { type: String, require: true }
             },
             body: { 
-                id: { type: mongoose.Types.ObjectId, require: true },
+                id: { type: Schema.Types.ObjectId, require: true },
                 type: { type: String, require: true },
                 name: { type: String, require: true },
                 url: { type: String, require: true }
              },
             legs: { 
-                id: { type: mongoose.Types.ObjectId, require: true },
+                id: { type: Schema.Types.ObjectId, require: true },
                 type: { type: String, require: true },
                 name: { type: String, require: true },
                 url: { type: String, require: true }
              },
             feet: { 
-                id: { type: mongoose.Types.ObjectId, require: true },
+                id: { type: Schema.Types.ObjectId, require: true },
                 type: { type: String, require: true },
                 name: { type: String, require: true },
                 url: { type: String, require: true }
@@ -36,4 +36,4 @@ const CharacterSchema = new Schema(
     }
 );
 
-module.exports = mongoose.model("CharacterSchema", CharacterSchema)
+module.exports = mongoose.model("Characters", CharacterSchema, "characters")

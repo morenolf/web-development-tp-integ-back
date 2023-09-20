@@ -40,13 +40,19 @@ class UserNotFound extends Error {
   }
 }
 
+class UserAlreadyExist extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "UserAlreadyExist";
+  }
+}
+
 class RepositoryFailure extends Error {
   constructor(message) {
     super(message);
     this.name = "RepositoryFailure";
   }
 }
-   
 
 module.exports = { 
   ValidationError,
@@ -55,5 +61,6 @@ module.exports = {
   ClothNotFound,
   UserNotAllowed,
   UserNotFound,
+  UserAlreadyExist,
   RepositoryFailure
 }

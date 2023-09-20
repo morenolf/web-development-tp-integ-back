@@ -1,14 +1,17 @@
 const jwt = require('jsonwebtoken')
+const { UserNotAllowed } = require("../models/exceptions.js");
 
 const VerifyToken = (req, res, next) => {
-    const token = req.header('auth-token')
-    if (!token) throw new UserNotAllowed("Failed to validate user");
     try {
-        const verified = jwt.verify(token, process.env.TOKEN_SECRET)
+        const token = req.header('Authorization').replace("Bearer ","");
+        if (!token) throw new UserNotAllowed("Failed to validate user");
+
+        const verified = jwt.verify(token, "TESTING TOKEN KEY")
         req.user = verified
+        console.log('User validated')
         next()
     } catch (error) {
-        throw new UserNotAllowed("Failed to validate user");
+        next(error)
     }
 }
 

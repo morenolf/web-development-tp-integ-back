@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const HealthRouter = require("./src/routes/health.js");
 const CharactersRouter = require("./src/routes/characters.js");
 const ClothRouter = require("./src/routes/cloth.js");
+const UsersRouter = require("./src/routes/users.js");
 const { LogError } = require("./src/middlewares/log_error.js");
 const { ErrorHandler } = require("./src/middlewares/error_handler.js");
 const { CreateDBConnection } = require("./src/repositories/db_client.js");
@@ -16,19 +17,20 @@ CreateDBConnection(mongoDbConfig);
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(express.json());
 app.use(cors());
 
 //Controllers
 app.use("/health", HealthRouter);
 app.use("/characters", CharactersRouter);
 app.use("/cloth", ClothRouter);
+app.use("/users", UsersRouter);
 
 //Middleware
 app.use(LogError);
 app.use(ErrorHandler);
-
 
 //Rest server
 const server = config.get("server");

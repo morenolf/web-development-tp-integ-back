@@ -12,4 +12,4 @@ const ClothSchema = new Schema(
     }
 );
 
-module.exports = mongoose.model("ClothSchema", ClothSchema)
+module.exports = mongoose.model("Cloth", ClothSchema, "cloth")

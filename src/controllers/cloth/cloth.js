@@ -1,6 +1,6 @@
 const { validationResult } = require("express-validator");
-const { ValidationError } = require("../models/exceptions.js");
-const ClothRepository = require("../repositories/cloth_repository.js");
+const { ValidationError } = require("../../models/exceptions.js");
+const ClothRepository = require("../../repositories/cloth_repository.js");
 
 const Cloth = async (req, res, next) => {
     try {
@@ -12,11 +12,11 @@ const Cloth = async (req, res, next) => {
 
         const page = parseInt(req.query.page);
         const limit = parseInt(req.query.limit);
-        const type = parseInt(req.params['type']);
+        const type = req.params['type'];
 
         const cloth = await ClothRepository.ClothByPaging(page, limit, type);
 
-        const count = await cloth.count();
+        const count = cloth.length;
 
         if (count == 0) {
             totalPages = Math.ceil(0)
@@ -25,11 +25,10 @@ const Cloth = async (req, res, next) => {
         }
 
         res.json({
-            posts,
+            cloth,
             totalPages: totalPages,
             currentPage: page
           });
-
     } catch (error) {
         next(error)
     }

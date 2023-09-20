@@ -1,8 +1,8 @@
-const { body } = require('express-validator')
+const { query, body } = require('express-validator')
 
 const ValidateLogin = [
-    body('email').trim().not().isEmpty().withMessage("invalid mail"),
-    body('password').trim().not().isEmpty().withMessage("invalid user name")
+    query('email').trim().not().isEmpty().withMessage("invalid mail"),
+    query('password').trim().not().isEmpty().withMessage("invalid user name")
 ]
 
 const ValidateRegister = [

@@ -1,4 +1,4 @@
-const { ValidationError, MaxCharactersError, CharactersNotFound, UserNotAllowed, ClothNotFound, UserNotFound } = require("../models/exceptions.js");
+const { ValidationError, MaxCharactersError, CharactersNotFound, UserNotAllowed, ClothNotFound, UserNotFound, UserAlreadyExist } = require("../models/exceptions.js");
 
 const ErrorHandler = function(err, req, resp, next) {
     ValidateException(err)
@@ -13,7 +13,7 @@ const ValidateException = function(err) {
       break;
     case MaxCharactersError.name:
       err.status = 500
-      err.message = "Exceed maximum characters"
+      err.message = "Maximum characters creation exceeded"
       break;  
     case CharactersNotFound.name:
       err.status = 404
@@ -31,9 +31,9 @@ const ValidateException = function(err) {
       err.status = 404
       err.message = "User not found"
       break;
-    case UserNotFound.name:
-      err.status = 405
-      err.message = "Not allowed"
+    case UserAlreadyExist.name:
+      err.status = 409
+      err.message = "Conflict with user"
       break;
     default:
       err.status = 500

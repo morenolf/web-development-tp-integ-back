@@ -1,8 +1,8 @@
 
 
-const CharacterService = require("../services/character_service.js")
+const CharacterService = require("../../services/character_service.js")
 const { validationResult } = require("express-validator");
-const { ValidationError } = require("../models/exceptions.js");
+const { ValidationError } = require("../../models/exceptions.js");
 const mongoose = require("mongoose");
 
 const Characters = async (req, res, next) => {
@@ -27,7 +27,9 @@ const CreateCharacters = async (req, res, next) => {
             console.log(errors.array());
             next(new ValidationError('Failed to validate character creation'));
         }
+
         newCharacter = CharacterFromRequest(req.params['userId'], req.body)
+        
         character = await CharacterService.CreateCharacter(newCharacter)
     
         res.json(character);
@@ -36,37 +38,27 @@ const CreateCharacters = async (req, res, next) => {
     }
 };
 
-const CharacterFromRequest = function(userId, body) {
+const CharacterFromRequest = function(userId, bodyReq) {
+    cloth = bodyReq.cloth
     return {            
         id: new mongoose.Types.ObjectId(),
         userId: userId,
-        name: body.name,
+        name: bodyReq.name,
         cloth: {
-            head: {
-                id: body.cloth.head.id,
-                type: body.cloth.head.type,
-                name: body.cloth.head.name,
-                url: body.cloth.head.url
-            },
-            body: {
-                id: body.cloth.body.id,
-                type: body.cloth.body.type,
-                name: body.cloth.body.name,
-                url: body.cloth.body.url
-            },
-            legs: {
-                id: body.cloth.legs.id,
-                type: body.cloth.legs.type,
-                name: body.cloth.legs.name,
-                url: body.cloth.legs.url
-            },
-            feet: {
-                id: body.cloth.feet.id,
-                type: body.cloth.feet.type,
-                name: body.cloth.feet.name,
-                url: body.cloth.feet.url
-            },
+            head: getCloth(cloth.head),
+            body: getCloth(cloth.body),
+            legs: getCloth(cloth.legs),
+            feet: getCloth(cloth.feet)
         }
+    }
+}
+
+const getCloth = function(cloth) {
+    return {
+        id: new mongoose.Types.ObjectId(cloth.id.toString()) ,
+        type: cloth.type,
+        name: cloth.name,
+        url: cloth.url
     }
 }
 
