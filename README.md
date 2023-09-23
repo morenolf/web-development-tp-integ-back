@@ -74,8 +74,8 @@ Npm scripts basically allow us to call (and chain) terminal commands via npm.
 ### Usages
 
 - Postman env and endpoints collection: 
-[a link]https://github.com/morenolf/web-development-tp-integ-back/blob/develop-express/postman_collection.json)
-[a link](https://github.com/morenolf/web-development-tp-integ-back/blob/develop-express/postman_dev_env.json)
+[Collection] (https://github.com/morenolf/web-development-tp-integ-back/blob/develop-express/postman_collection.json)
+[Environment] (https://github.com/morenolf/web-development-tp-integ-back/blob/develop-express/postman_dev_env.json)
 
 - Register a new user - generates token that will be populated to environment (access_token)
 ```
