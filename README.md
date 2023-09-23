@@ -1,5 +1,4 @@
-# web-development-tp-integ-back
-# Nodejs FES Template
+# Nodejs web-development-tp-integ-back
 
 # Environment vars
 This project uses the following environment variables:
@@ -11,7 +10,6 @@ This project uses the following environment variables:
 
 # Pre-requisites
 - Install [Node.js](https://nodejs.org/en/) version 8.0.0
-
 
 # Getting started
 - Clone the repository
@@ -27,7 +25,7 @@ npm install
 ```
 npm start
 ```
-  Navigate to `http://localhost:8001`
+  Navigate to `http://localhost:8091`
 
 - API Document endpoints
 
@@ -73,8 +71,68 @@ Npm scripts basically allow us to call (and chain) terminal commands via npm.
 | `lint`                    | Runs TSLint on project files       |
 
 
-# Common Issues
+- Register a new user - generates token that will be populated to environment (access_token)
+```
+POST /users/register
+```
+- Body
+```
+{
+    "name" : "Lucas",
+    "email" : "lucas.123@123.com",
+    "password" : "Lucas.12345"
+}
+```
 
-## npm install fails
-The current solution has an example for using a private npm repository. if you want to use the public npm repository, remove the .npmrc file.
+- Logins a user - generates bearar token that will be populated to environment (access_token)
+```
+POST /users/login
+```
+
+- Retrieves cloth by page and limit - It needs a bearar token from Login or created user.
+```
+GET /cloth/{{type}}?page=1&limit=5
+```
+
+- Retrieves all the characters for given user - It needs a bearar token from Login or created user.
+```
+GET /characters/{{user_id}}
+```
+
+- Creates a character - It needs a bearar token from Login or created user.
+```
+POST /characters/{{user_id}}
+```
+- Body
+```
+{
+    "name": "Lucas 123",
+    "cloth": {
+        "head": {
+            "id": "578e5cbd5b080fbfb7bed3d0",
+            "type": "head",            
+            "name": "head name 123" , 
+            "url": "image_123.jpg"
+        },
+        "body": {
+            "id": "578e5cbd5b080fbfb7bed3d0",
+            "type": "body",
+            "name": "body name 123" , 
+            "url": "image_body_123.jpg"
+        },
+        "legs": {
+            "id": "578e5cbd5b080fbfb7bed3d0",
+            "type": "legs",
+            "name": "legs name 123" , 
+            "url": "image_legs_123.jpg"
+        },
+        "feet": {
+            "id": "578e5cbd5b080fbfb7bed3d0",
+            "type": "feet",
+            "name": "feet name 123" , 
+            "url": "image_feet_123.jpg"
+        }
+    }
+}
+```
 
