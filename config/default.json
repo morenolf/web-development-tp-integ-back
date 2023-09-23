@@ -1,0 +1,12 @@
+{
+    "server": {
+        "port": 8091,
+        "hostname": "localhost"
+    },
+    "mongoDb": {
+        "url": "mongodb://127.0.0.1",
+        "port": 27017,
+        "name": "fullstack-api-db"
+    },
+    "TOKEN_KEY" : "random token key name"
+}

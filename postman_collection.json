@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "01aa174c-c78d-493c-be5f-08f757261ea9",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "15552108",
+		"_collection_link": "https://crimson-meadow-790648.postman.co/workspace/testing~47f6187d-8339-4f9a-b58f-494bb4057336/collection/15552108-01aa174c-c78d-493c-be5f-08f757261ea9?action=share&source=collection_link&creator=15552108"
+	},
+	"item": [
+		{
+			"name": "Characters Get",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access_token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8091/characters/{{user_id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Cloth Get",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access_token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8091/cloth/{{type}}?page=1&limit=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"cloth",
+						"{{type}}"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Characters Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access_token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Lucas 123\",\r\n    \"cloth\": {\r\n        \"head\": {\r\n            \"id\": \"578e5cbd5b080fbfb7bed3d0\",\r\n            \"type\": \"head\",            \r\n            \"name\": \"head name 123\" , \r\n            \"url\": \"image_123.jpg\"\r\n        },\r\n        \"body\": {\r\n            \"id\": \"578e5cbd5b080fbfb7bed3d0\",\r\n            \"type\": \"body\",\r\n            \"name\": \"body name 123\" , \r\n            \"url\": \"image_body_123.jpg\"\r\n        },\r\n        \"legs\": {\r\n            \"id\": \"578e5cbd5b080fbfb7bed3d0\",\r\n            \"type\": \"legs\",\r\n            \"name\": \"legs name 123\" , \r\n            \"url\": \"image_legs_123.jpg\"\r\n        },\r\n        \"feet\": {\r\n            \"id\": \"578e5cbd5b080fbfb7bed3d0\",\r\n            \"type\": \"feet\",\r\n            \"name\": \"feet name 123\" , \r\n            \"url\": \"image_feet_123.jpg\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8091/characters/{{user_id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Users Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json()\r",
+							"pm.environment.set(\"access_token\", response.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8091/users/login?email=lucas.123@123.com&password=Lucas.12345",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"users",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "lucas.123@123.com"
+						},
+						{
+							"key": "password",
+							"value": "Lucas.12345"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json()\r",
+							"pm.environment.set(\"access_token\", response.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Lucas\",\r\n    \"email\" : \"lucas.123@123.com\",\r\n    \"password\" : \"Lucas.12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8091/users/register"
+			},
+			"response": []
+		}
+	]
+}
