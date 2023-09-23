@@ -10,6 +10,13 @@ const UsersRouter = require("./src/routes/users.js");
 const { LogError } = require("./src/middlewares/log_error.js");
 const { ErrorHandler } = require("./src/middlewares/error_handler.js");
 const { CreateDBConnection } = require("./src/repositories/db_client.js");
+const swaggerUi = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerDocument = require('./swagger.json');
+
+/*
+router.get('/api-docs', swaggerUi.setup(swaggerDocument));
+*/
 
 //DB Connection
 const mongoDbConfig = config.get("mongoDb");
@@ -21,6 +28,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.json());
 app.use(cors());
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument)
+);
 
 //Controllers
 app.use("/health", HealthRouter);

@@ -17,6 +17,13 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.0.0",
     "mongoose": "^7.5.0",
+    "swagger-autogen": "^2.23.6",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
     "validator": "^13.11.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "swagger-autogen": "node swagger.js"
   }
 }
