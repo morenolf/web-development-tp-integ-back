@@ -73,11 +73,33 @@ Npm scripts basically allow us to call (and chain) terminal commands via npm.
 
 ### Usages
 
+- Database
+Configuration is found in ./config/default.json
+We should be able to connect to any local or remote database using mongoDb fields:
+name: database name from local or remote cluster.
+server: mongo db server name from cluster.
+password: cluster/db password.
+
+```
+{
+    "server": {
+        "port": 8091,
+        "hostname": "localhost"
+    },
+    "mongoDb": {
+        "url": "mongodb://",
+        "name": "fullstack-api-db",
+        "server": "cluster0.loohc7m.mongodb.net",
+        "password": "from_vault"
+    },
+    "TOKEN_KEY" : "random token key name"
+}
+```
+
 - Postman env and endpoints collection: 
     https://github.com/morenolf/web-development-tp-integ-back/blob/main/postman_collection.json
 
     https://github.com/morenolf/web-development-tp-integ-back/blob/main/postman_dev_env.json
-
 
 - Register a new user - generates token that will be populated to environment (access_token)
 ```
