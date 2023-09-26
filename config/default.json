@@ -4,9 +4,10 @@
         "hostname": "localhost"
     },
     "mongoDb": {
-        "url": "mongodb://127.0.0.1",
-        "port": 27017,
-        "name": "fullstack-api-db"
+        "url": "mongodb://",
+        "name": "fullstack-api-db",
+        "server": "cluster0.loohc7m.mongodb.net",
+        "password": "full-stack-back-node-up"
     },
     "TOKEN_KEY" : "random token key name"
 }
