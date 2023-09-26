@@ -7,7 +7,7 @@
         "url": "mongodb://",
         "name": "fullstack-api-db",
         "server": "cluster0.loohc7m.mongodb.net",
-        "password": "full-stack-back-node-up"
+        "password": "from_vault"
     },
     "TOKEN_KEY" : "random token key name"
 }
