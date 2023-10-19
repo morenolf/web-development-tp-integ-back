@@ -54,6 +54,13 @@ class RepositoryFailure extends Error {
   }
 }
 
+class InvalidUser  extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "InvalidUser";
+  }
+}
+
 module.exports = { 
   ValidationError,
   MaxCharactersError,    
@@ -62,5 +69,6 @@ module.exports = {
   UserNotAllowed,
   UserNotFound,
   UserAlreadyExist,
-  RepositoryFailure
+  RepositoryFailure,
+  InvalidUser
 }

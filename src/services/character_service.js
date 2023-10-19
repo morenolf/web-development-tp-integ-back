@@ -23,6 +23,26 @@ const CreateCharacter = async(character) => {
     return await CharacterRepository.Create(character);
 }
 
-module.exports = { CreateCharacter, GetCharacters }
+const UpdateCharacter = async(character) => {
+        
+    character = await CharacterRepository.GetById(character.id);
+    if (!character) {
+        throw new CharactersNotFound('Character not found');
+    }
+
+    return await CharacterRepository.UpdateById(character);
+}
+
+const DeleteCharacter = async(id) => {
+        
+    character = await CharacterRepository.GetById(id);
+    if (!character) {
+        throw new CharactersNotFound('Character not found');
+    }
+
+    return await CharacterRepository.DeleteById(id);
+}
+
+module.exports = { GetCharacters, CreateCharacter, UpdateCharacter, DeleteCharacter }
 
 

@@ -17,8 +17,16 @@ const Login = async (req, res, next) => {
             throw new UserNotFound("User not found");
         }
 
-        const validPassword = await bcrypt.compare(req.query.password, user.password);
-        if (!validPassword) throw new InvalidUser("Invalid user")
+        bcrypt.hash(req.query.password, 10, function(err, hash) {
+            if (err) { throw new InvalidUser("Invalid user"); }
+        
+            bcrypt.compare(req.query.password, user.password, function(err, result) {
+                if (err) {  new InvalidUser("Invalid user") }
+            });
+        });
+
+        //const validPassword = await bcrypt.compare("asd12345", "$2a$10$nw4C/X5peha5Nx/c9OjUDeCdpbmPEMKfy4D1SYDk9wVL1rYXLnkZO");
+        //if (!validPassword) throw new InvalidUser("Invalid user");
 
         const token = jwt.sign(
             { user_id: user._id, email: user.email },
@@ -45,7 +53,7 @@ const Register = async (req, res, next) => {
         }
 
         const user = new UserSchema({
-            name: req.body.name,
+            username: req.body.username,
             email: req.body.email,
             password: ""
         });
@@ -62,7 +70,7 @@ const Register = async (req, res, next) => {
 
         const token = jwt.sign(
             { user_id: savedUser._id, email: savedUser.email },
-            process.env.TOKEN_KEY,
+            "TESTING TOKEN KEY",
             {
               expiresIn: "2h",
             }

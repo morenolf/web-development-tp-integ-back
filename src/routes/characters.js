@@ -9,4 +9,8 @@ router.get('/:userId', VerifyToken, UserIdValidator, Characters)
 
 router.post('/:userId', VerifyToken, CreateCharacterCheck, CreateCharacters)
 
+router.patch('/:id', VerifyToken, CreateCharacterCheck, CreateCharacters)
+
+router.delete('/:id', VerifyToken, CreateCharacterCheck, CreateCharacters)
+
 module.exports = router;

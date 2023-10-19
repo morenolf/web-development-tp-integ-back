@@ -4,10 +4,10 @@
         "hostname": "localhost"
     },
     "mongoDb": {
-        "url": "mongodb://",
-        "name": "fullstack-api-db",
+        "url": "mongodb+srv://",
+        "name": "full-stack-api",
         "server": "cluster0.loohc7m.mongodb.net",
-        "password": "from_vault"
+        "password": "full-stack-back-node-up"
     },
     "TOKEN_KEY" : "random token key name"
 }

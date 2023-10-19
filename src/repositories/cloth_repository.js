@@ -1,11 +1,21 @@
 const ClothSchema = require("../models/cloth_schema.js");
 const { RepositoryFailure } = require("../models/exceptions.js");
 
+
+const CountCloth = async (type) => {
+    try {
+        return await ClothSchema.countDocuments({"type": type});
+    }catch(err){
+        console.log(err);
+        throw new RepositoryFailure("Failed to count cloth by type")
+    }
+}
+
 const ClothByPaging = async (page, limit, type) => {
     try {
-        return await ClothSchema.find({type: type})
+        return await ClothSchema.find({"type": type})
         .limit(limit * 1)
-        .skip((page - 1) * limit)
+        .skip((page) * limit)
         .exec();
     }catch(err){
         console.log(err);
@@ -23,4 +33,4 @@ const Cloth = async () => {
     }
 }
 
-module.exports = { ClothByPaging, Cloth }
+module.exports = { ClothByPaging, Cloth, CountCloth }

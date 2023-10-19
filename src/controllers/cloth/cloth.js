@@ -14,9 +14,8 @@ const Cloth = async (req, res, next) => {
         const limit = parseInt(req.query.limit);
         const type = req.params['type'];
 
+        const count = await ClothRepository.CountCloth(type);
         const cloth = await ClothRepository.ClothByPaging(page, limit, type);
-
-        const count = cloth.length;
 
         if (count == 0) {
             totalPages = Math.ceil(0)

@@ -38,6 +38,40 @@ const CreateCharacters = async (req, res, next) => {
     }
 };
 
+const UpdateCharacters = async (req, res, next) => {
+    try {
+        let errors = await validationResult(req); 
+        if ( !errors.isEmpty()) {
+            console.log(errors.array());
+            next(new ValidationError('Failed to validate character update'));
+        }
+
+        updatedCharacter = CharacterFromRequest(req.params['userId'], req.body)
+        
+        character = await CharacterService.UpdateCharacter(newCharacter)
+    
+        res.json(character);
+    } catch (error) {
+        next(error)
+    }
+};
+
+const DeleteCharacters = async (req, res, next) => {
+    try {
+        let errors = await validationResult(req); 
+        if ( !errors.isEmpty()) {
+            console.log(errors.array());
+            next(new ValidationError('Failed to validate character deletion'));
+        }
+
+        character = await CharacterService.DeleteCharacter(id)
+    
+        res.json(character);
+    } catch (error) {
+        next(error)
+    }
+};
+
 const CharacterFromRequest = function(userId, bodyReq) {
     cloth = bodyReq.cloth
     return {            
@@ -54,6 +88,9 @@ const CharacterFromRequest = function(userId, bodyReq) {
 }
 
 const getCloth = function(cloth) {
+    if (!cloth){
+        return null
+    }
     return {
         id: new mongoose.Types.ObjectId(cloth.id.toString()) ,
         type: cloth.type,
@@ -64,5 +101,7 @@ const getCloth = function(cloth) {
 
 module.exports = {
     Characters,
-    CreateCharacters
+    CreateCharacters,
+    UpdateCharacters,
+    DeleteCharacters
 }

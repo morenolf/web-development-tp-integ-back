@@ -1,4 +1,4 @@
-const { ValidationError, MaxCharactersError, CharactersNotFound, UserNotAllowed, ClothNotFound, UserNotFound, UserAlreadyExist } = require("../models/exceptions.js");
+const { ValidationError, MaxCharactersError, CharactersNotFound, UserNotAllowed, ClothNotFound, UserNotFound, UserAlreadyExist, InvalidUser } = require("../models/exceptions.js");
 
 const ErrorHandler = function(err, req, resp, next) {
     ValidateException(err)
@@ -34,6 +34,10 @@ const ValidateException = function(err) {
     case UserAlreadyExist.name:
       err.status = 409
       err.message = "Conflict with user"
+      break;
+    case InvalidUser.name:
+      err.status = 401
+      err.message = "Invalid user"
       break;
     default:
       err.status = 500

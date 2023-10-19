@@ -28,8 +28,37 @@ const GetByUserId = async function(userId){
     }
 }
 
+const GetById = async function(id){
+    try {
+        return await CharacterSchema.findById({id: id});  
+    }catch(err){
+        console.log(err);
+        throw new RepositoryFailure("Failed to retrieve characters by id")
+    }
+}
+
+const UpdateById = async function(id){
+    try {
+        return await CharacterSchema.UpdateById({id: id});  
+    }catch(err){
+        console.log(err);
+        throw new RepositoryFailure("Failed to update character by id")
+    }
+}
+
+const DeleteById = async function(id){
+    try {
+        return await CharacterSchema.DeleteById({id: id});  
+    }catch(err){
+        console.log(err);
+        throw new RepositoryFailure("Failed to delete character by id")
+    }
+}
+
 module.exports = {
     CountAll,
     Create,
-    GetByUserId    
+    GetByUserId,
+    GetById,
+    DeleteById
 }

@@ -8,11 +8,18 @@ const UserIdValidator = [
 const CreateCharacterCheck = [
     param('userId').trim().not().isEmpty().withMessage("invalid user id"),
     body('name').trim().not().isEmpty().withMessage("invalid name"),
-    body('cloth').exists().withMessage("invalid cloth"),
+    body('gender').trim().not().isEmpty().withMessage("invalid gender"),
+]
+
+const UpdateCharacterCheck = [
+    param('id').trim().not().isEmpty().withMessage("invalid character id"),
     body('cloth.head.id').trim().not().isEmpty()
     .custom(value => {
             return ObjectId.isValidObjectId(value);
-      }).withMessage("invalid head id"),
+      }).withMessage("invalid head id"),      
+    body('name').trim().not().isEmpty().withMessage("invalid name"),
+    body('gender').trim().not().isEmpty().withMessage("invalid gender"),
+      /*
     body('cloth.head.name').trim().not().isEmpty().withMessage("invalid head name"),
     body('cloth.head.type').trim().not().isEmpty().withMessage("invalid head type"),
     body('cloth.head.url').trim().not().isEmpty().withMessage("invalid head url"),
@@ -31,9 +38,15 @@ const CreateCharacterCheck = [
     body('cloth.feet.name').trim().not().isEmpty().withMessage("invalid feet name"),
     body('cloth.feet.type').trim().not().isEmpty().withMessage("invalid feet type"),
     body('cloth.feet.url').trim().not().isEmpty().withMessage("invalid feet url"),
+    */
+]
+
+const DeleteCharacterCheck = [
+    param('id').trim().not().isEmpty().withMessage("invalid character id"),
 ]
 
 module.exports = {
-    CreateCharacterCheck, 
-    UserIdValidator
+    UserIdValidator,
+    CreateCharacterCheck,
+    UpdateCharacterCheck
 }
