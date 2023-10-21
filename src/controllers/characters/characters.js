@@ -20,7 +20,7 @@ const Characters = async (req, res, next) => {
     }
 };
 
-const CreateCharacters = async (req, res, next) => {
+const CreateCharacter = async (req, res, next) => {
     try {
         let errors = await validationResult(req); 
         if ( !errors.isEmpty()) {
@@ -38,7 +38,7 @@ const CreateCharacters = async (req, res, next) => {
     }
 };
 
-const UpdateCharacters = async (req, res, next) => {
+const UpdateCharacter = async (req, res, next) => {
     try {
         let errors = await validationResult(req); 
         if ( !errors.isEmpty()) {
@@ -56,7 +56,7 @@ const UpdateCharacters = async (req, res, next) => {
     }
 };
 
-const DeleteCharacters = async (req, res, next) => {
+const DeleteCharacter = async (req, res, next) => {
     try {
         let errors = await validationResult(req); 
         if ( !errors.isEmpty()) {
@@ -101,7 +101,7 @@ const getCloth = function(cloth) {
 
 module.exports = {
     Characters,
-    CreateCharacters,
-    UpdateCharacters,
-    DeleteCharacters
+    CreateCharacter,
+    UpdateCharacter,
+    DeleteCharacter
 }

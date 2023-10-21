@@ -5,7 +5,7 @@ const CharacterSchema = new Schema(
     {
         userId: { type: String, require: true },
         name: { type: String, require: true },
-        cloth: { 
+        cloth: {  
             head: { 
                 id: { type: Schema.Types.ObjectId, require: true },
                 type: { type: String, require: true },
