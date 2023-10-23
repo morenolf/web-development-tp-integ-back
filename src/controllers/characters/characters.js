@@ -73,16 +73,16 @@ const DeleteCharacter = async (req, res, next) => {
 };
 
 const CharacterFromRequest = function(userId, bodyReq) {
-    cloth = bodyReq.cloth
+    
     return {            
         id: new mongoose.Types.ObjectId(),
         userId: userId,
         name: bodyReq.name,
         cloth: {
-            head: getCloth(cloth.head),
-            body: getCloth(cloth.body),
-            legs: getCloth(cloth.legs),
-            feet: getCloth(cloth.feet)
+            head: bodyReq.head? clothgetCloth(head) : null,
+            body: bodyReq.body? getCloth(body):null,
+            legs: bodyReq.legs? getCloth(legs):null,
+            feet: bodyReq.feet? getCloth(feet): null
         }
     }
 }

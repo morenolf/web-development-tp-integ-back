@@ -8,7 +8,7 @@ const UserIdValidator = [
 const CreateCharacterCheck = [
     param('userId').trim().not().isEmpty().withMessage("invalid user id"),
     body('name').trim().not().isEmpty().withMessage("invalid name"),
-    body('gender').trim().not().isEmpty().withMessage("invalid gender"),
+    //body('gender').trim().not().isEmpty().withMessage("invalid gender"),
 ]
 
 const UpdateCharacterCheck = [

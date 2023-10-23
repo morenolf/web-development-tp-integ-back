@@ -25,7 +25,6 @@ const ClothByPaging = async (page, limit, type) => {
 
 const Cloth = async () => {
     try {
-        //{type: type}
         return await ClothSchema.find(); 
     }catch(err){
         console.log(err);
