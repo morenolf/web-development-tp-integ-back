@@ -10,7 +10,7 @@ const Characters = async (req, res, next) => {
         let errors = await validationResult(req); 
         if ( !errors.isEmpty()) {
             console.log(errors.array());
-            throw new ValidationError('Failed to validate user id');
+            throw new ValidationError('Failed to Get Characters');
         }
         characters = await CharacterService.GetCharacters(req.params['userId']);
 
@@ -19,6 +19,22 @@ const Characters = async (req, res, next) => {
         next(error)
     }
 };
+
+const GetCharacter = async (req, res, next) => {
+    try {
+        let errors = await validationResult(req); 
+        if ( !errors.isEmpty()) {
+            console.log(errors.array());
+            throw new ValidationError('Failed to validate Get Character params');
+        }
+        characters = await CharacterService.GetCharacter(req.params['id']);
+
+        res.json(characters);
+    } catch (error) {
+        next(error)
+    }
+};
+
 
 const CreateCharacter = async (req, res, next) => {
     try {
@@ -46,9 +62,9 @@ const UpdateCharacter = async (req, res, next) => {
             next(new ValidationError('Failed to validate character update'));
         }
 
-        updatedCharacter = CharacterFromRequest(req.params['userId'], req.body)
+        updatedCharacter = UpdateCharacterFromRequest(req.params['id'], req.body)
         
-        character = await CharacterService.UpdateCharacter(newCharacter)
+        character = await CharacterService.UpdateCharacter(updatedCharacter)
     
         res.json(character);
     } catch (error) {
@@ -78,29 +94,29 @@ const CharacterFromRequest = function(userId, bodyReq) {
         id: new mongoose.Types.ObjectId(),
         userId: userId,
         name: bodyReq.name,
-        cloth: {
-            head: bodyReq.head? clothgetCloth(head) : null,
-            body: bodyReq.body? getCloth(body):null,
-            legs: bodyReq.legs? getCloth(legs):null,
-            feet: bodyReq.feet? getCloth(feet): null
-        }
+        head: bodyReq.head? bodyReq.head: null,
+        body: bodyReq.body? bodyReq.body: null,
+        legs: bodyReq.legs? bodyReq.legs: null,
+        feet: bodyReq.feet? bodyReq.feet: null
     }
 }
 
-const getCloth = function(cloth) {
-    if (!cloth){
-        return null
-    }
-    return {
-        id: new mongoose.Types.ObjectId(cloth.id.toString()) ,
-        type: cloth.type,
-        name: cloth.name,
-        url: cloth.url
+const UpdateCharacterFromRequest = function(id, bodyReq) {
+    
+    return {            
+        id: new mongoose.Types.ObjectId(id),
+        userId: null ,
+        name: bodyReq.name,
+        head: bodyReq.head? bodyReq.head: null,
+        body: bodyReq.body? bodyReq.body: null,
+        legs: bodyReq.legs? bodyReq.legs: null,
+        feet: bodyReq.feet? bodyReq.feet: null
     }
 }
 
 module.exports = {
     Characters,
+    GetCharacter,
     CreateCharacter,
     UpdateCharacter,
     DeleteCharacter

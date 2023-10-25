@@ -12,6 +12,16 @@ const GetCharacters = async function(userId){
     return characters;
 }
 
+const GetCharacter = async function(id){
+    character = await CharacterRepository.GetById(id);
+
+    if (!character) {
+        throw new CharactersNotFound('Characters not found');
+    }
+
+    return character;
+}
+
 const CreateCharacter = async(character) => {
         
     charactersCount = await CharacterRepository.CountAll(character.userId);
@@ -23,13 +33,17 @@ const CreateCharacter = async(character) => {
 }
 
 const UpdateCharacter = async(character) => {
-        
-    character = await CharacterRepository.GetById(character.id);
+    characterDB = await CharacterRepository.GetById(character.id);
     if (!character) {
         throw new CharactersNotFound('Character not found');
     }
+    characterDB.name = character.name
+    characterDB.head = character.head
+    characterDB.body = character.body
+    characterDB.legs = character.legs
+    characterDB.feet = character.feet
 
-    return await CharacterRepository.UpdateById(character);
+    return await CharacterRepository.UpdateById(characterDB);
 }
 
 const DeleteCharacter = async(id) => {
@@ -42,6 +56,6 @@ const DeleteCharacter = async(id) => {
     return await CharacterRepository.DeleteById(id);
 }
 
-module.exports = { GetCharacters, CreateCharacter, UpdateCharacter, DeleteCharacter }
+module.exports = { GetCharacters, GetCharacter, CreateCharacter, UpdateCharacter, DeleteCharacter }
 
 

@@ -30,16 +30,16 @@ const GetByUserId = async function(userId){
 
 const GetById = async function(id){
     try {
-        return await CharacterSchema.findById({id: id});  
+        return await CharacterSchema.findById(id);  
     }catch(err){
         console.log(err);
         throw new RepositoryFailure("Failed to retrieve characters by id")
     }
 }
 
-const UpdateById = async function(id){
+const UpdateById = async function(character){
     try {
-        return await CharacterSchema.UpdateById({id: id});  
+        return await CharacterSchema.updateOne(character);  
     }catch(err){
         console.log(err);
         throw new RepositoryFailure("Failed to update character by id")
@@ -48,7 +48,7 @@ const UpdateById = async function(id){
 
 const DeleteById = async function(id){
     try {
-        return await CharacterSchema.DeleteById({id: id});  
+        return await CharacterSchema.DeleteById(id);  
     }catch(err){
         console.log(err);
         throw new RepositoryFailure("Failed to delete character by id")
@@ -60,5 +60,6 @@ module.exports = {
     Create,
     GetByUserId,
     GetById,
+    UpdateById,
     DeleteById
 }
