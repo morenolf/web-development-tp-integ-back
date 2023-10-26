@@ -22,6 +22,7 @@ const UpdateCharacterCheck = [
 ]
 
 const DeleteCharacterCheck = [
+    param('userId').trim().not().isEmpty().withMessage("invalid user id"),
     param('id').trim().not().isEmpty().withMessage("invalid character id"),
 ]
 

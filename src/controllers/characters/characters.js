@@ -79,8 +79,9 @@ const DeleteCharacter = async (req, res, next) => {
             console.log(errors.array());
             next(new ValidationError('Failed to validate character deletion'));
         }
-
-        character = await CharacterService.DeleteCharacter(id)
+        userId = req.params['userId']
+        id = req.params['id']
+        character = await CharacterService.DeleteCharacter(userId, id)
     
         res.json(character);
     } catch (error) {
@@ -104,7 +105,7 @@ const CharacterFromRequest = function(userId, bodyReq) {
 const UpdateCharacterFromRequest = function(id, bodyReq) {
     
     return {            
-        id: new mongoose.Types.ObjectId(id),
+        _id: new mongoose.Types.ObjectId(id),
         userId: null ,
         name: bodyReq.name,
         head: bodyReq.head? bodyReq.head: null,

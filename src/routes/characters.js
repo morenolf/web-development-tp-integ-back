@@ -13,6 +13,6 @@ router.post('/:userId', VerifyToken, CreateCharacterCheck, CreateCharacter)
 
 router.patch('/:id', VerifyToken, UpdateCharacterCheck, UpdateCharacter)
 
-router.delete('/:id', VerifyToken, DeleteCharacterCheck, DeleteCharacter)
+router.delete('/:userId/character/:id', VerifyToken, DeleteCharacterCheck, DeleteCharacter)
 
 module.exports = router;

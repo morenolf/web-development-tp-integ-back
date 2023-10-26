@@ -33,8 +33,8 @@ const CreateCharacter = async(character) => {
 }
 
 const UpdateCharacter = async(character) => {
-    characterDB = await CharacterRepository.GetById(character.id);
-    if (!character) {
+    characterDB = await CharacterRepository.GetById(character._id);
+    if (!characterDB) {
         throw new CharactersNotFound('Character not found');
     }
     characterDB.name = character.name
@@ -48,7 +48,7 @@ const UpdateCharacter = async(character) => {
 
 const DeleteCharacter = async(id) => {
         
-    character = await CharacterRepository.GetById(id);
+    character = await CharacterRepository.DeleteById(id);
     if (!character) {
         throw new CharactersNotFound('Character not found');
     }

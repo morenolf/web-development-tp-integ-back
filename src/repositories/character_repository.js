@@ -39,7 +39,7 @@ const GetById = async function(id){
 
 const UpdateById = async function(character){
     try {
-        return await CharacterSchema.updateOne(character);  
+        return await CharacterSchema.updateOne({_id: character._id},character);  
     }catch(err){
         console.log(err);
         throw new RepositoryFailure("Failed to update character by id")
@@ -48,7 +48,7 @@ const UpdateById = async function(character){
 
 const DeleteById = async function(id){
     try {
-        return await CharacterSchema.DeleteById(id);  
+        return await CharacterSchema.deleteOne({_id: id});  
     }catch(err){
         console.log(err);
         throw new RepositoryFailure("Failed to delete character by id")
