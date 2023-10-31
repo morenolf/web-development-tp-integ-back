@@ -1,6 +1,15 @@
 const CharacterSchema = require("../models/character_schema.js");
 const { RepositoryFailure } = require("../models/exceptions.js");
 
+const GetTopLastCharacters = async function(){
+    try {
+        return await CharacterSchema.find().sort({timestamp : -1});
+    }catch(err){
+        console.log(err);
+        throw new RepositoryFailure("Failed to process character count")
+    }
+}
+
 const CountAll = async function(userId){
     try {
         return await CharacterSchema.countDocuments({userId: userId});    
@@ -56,6 +65,7 @@ const DeleteById = async function(id){
 }
 
 module.exports = {
+    GetTopLastCharacters,
     CountAll,
     Create,
     GetByUserId,

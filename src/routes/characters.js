@@ -1,9 +1,10 @@
 const express = require("express");
-const { Characters, GetCharacter, CreateCharacter, UpdateCharacter, DeleteCharacter} = require("../controllers/characters/characters.js");
+const { TopCharacters, Characters, GetCharacter, CreateCharacter, UpdateCharacter, DeleteCharacter} = require("../controllers/characters/characters.js");
 const { UserIdValidator, GetCharacterValidator, CreateCharacterCheck, UpdateCharacterCheck, DeleteCharacterCheck } = require("../controllers/characters/characters_request_validator.js");
 const { VerifyToken } = require("../middlewares/auth_validator.js");
 const router = express.Router();
 
+router.get('/top', TopCharacters)
 
 router.get('/:userId', VerifyToken, UserIdValidator, Characters)
 

@@ -20,6 +20,16 @@ const Characters = async (req, res, next) => {
     }
 };
 
+const TopCharacters = async (req, res, next) => {
+    try {
+        characters = await CharacterService.GetTopCharacters();
+
+        res.json(characters);
+    } catch (error) {
+        next(error)
+    }
+};
+
 const GetCharacter = async (req, res, next) => {
     try {
         let errors = await validationResult(req); 
@@ -116,6 +126,7 @@ const UpdateCharacterFromRequest = function(id, bodyReq) {
 }
 
 module.exports = {
+    TopCharacters,
     Characters,
     GetCharacter,
     CreateCharacter,

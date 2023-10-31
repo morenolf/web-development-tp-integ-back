@@ -2,6 +2,16 @@ const CharacterRepository = require("../repositories/character_repository.js");
 const { MaxCharactersError, CharactersNotFound } = require("../models/exceptions.js");
 const MAX_CHARACTERS = 4;
 
+const GetTopCharacters = async function(){
+    characters = await CharacterRepository.GetTopLastCharacters();
+
+    if (!characters) {
+        throw new CharactersNotFound('Characters not found');
+    }
+
+    return characters;
+}
+
 const GetCharacters = async function(userId){
     characters = await CharacterRepository.GetByUserId(userId);
 
@@ -56,6 +66,6 @@ const DeleteCharacter = async(id) => {
     return await CharacterRepository.DeleteById(id);
 }
 
-module.exports = { GetCharacters, GetCharacter, CreateCharacter, UpdateCharacter, DeleteCharacter }
+module.exports = { GetTopCharacters, GetCharacters, GetCharacter, CreateCharacter, UpdateCharacter, DeleteCharacter }
 
 
